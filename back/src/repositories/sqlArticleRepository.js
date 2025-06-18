@@ -10,10 +10,9 @@ import pool from '../utils/database.js';
 export async function getArticles() {
     // TODO
     const [rows] = await pool.query(`
-        SELECT articles.*, COALESCE(journalists.name, 'Unknown') AS journalist
+        SELECT articles.*, journalists.name AS journalist
         FROM articles
-        JOIN journalists ON articles.journalist_id = journalists.id
-        WHERE articles.id=?;
+        JOIN journalists ON articles.journalist_id = journalists.id;
         `);
     return rows;
 }
